@@ -1,5 +1,6 @@
 package com.zero.number.translation.controller;
 
+import com.zero.number.translation.domain.Response;
 import com.zero.number.translation.service.TranslationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,8 +14,12 @@ public class TranslationController implements Serializable {
 
     @RequestMapping(value = {"/{number}"}, method = {RequestMethod.GET})
     public ResponseEntity<?> convert(@PathVariable Long number){
-        String words = TranslationService.convert(number);
-        return new ResponseEntity<>(words, HttpStatus.OK);
+        Response resp = new Response();
+        resp.setCode(0);
+        resp.setMessage(TranslationService.convert(number));
+
+
+        return new ResponseEntity<>(resp, HttpStatus.OK);
     }
 
 

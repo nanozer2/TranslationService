@@ -11,13 +11,12 @@ import java.io.Serializable;
 @RestController
 public class TranslationController implements Serializable {
 
-
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = {"/{number}"}, method = {RequestMethod.GET})
     public ResponseEntity<?> convert(@PathVariable Long number){
         Response resp = new Response();
         resp.setCode(0);
         resp.setMessage(TranslationService.convert(number));
-
 
         return new ResponseEntity<>(resp, HttpStatus.OK);
     }
